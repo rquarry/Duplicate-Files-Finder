@@ -1,0 +1,4 @@
+9b96007a2dd617bc219cf8d3c7ff57e8 /home/ryan/Music/311/311/AlbumArtSmall.jpg
+9b96007a2dd617bc219cf8d3c7ff57e8 /home/ryan/Music/311/311/AlbumArt_{B6143C56-1314-4DEB-957E-3EC875C77F4B}_Small.jpg
+f499e07f3b47bb2316419579e61bb298 /home/ryan/Music/311/311/AlbumArt_{B6143C56-1314-4DEB-957E-3EC875C77F4B}_Large.jpg
+f499e07f3b47bb2316419579e61bb298 /home/ryan/Music/311/311/Folder.jpg
