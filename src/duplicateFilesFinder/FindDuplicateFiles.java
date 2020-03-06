@@ -1,4 +1,4 @@
-package duplicatefiles2ui;
+package duplicateFilesFinder;
 
 import java.nio.file.*;
 import java.io.*;
@@ -9,7 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import static java.nio.file.FileVisitResult.*;
 
-public class DuplicateFiles2 extends SimpleFileVisitor<Path> {
+public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
 
     // This is the max file size read with "readAllBytes" before input is broken
     // into byte array chunks
@@ -19,7 +19,7 @@ public class DuplicateFiles2 extends SimpleFileVisitor<Path> {
     public int count = 0;
     public ArrayList<String> userFiles;
 
-    public DuplicateFiles2() {
+    public FindDuplicateFiles() {
 
         userFiles = new ArrayList();
     }
