@@ -1,24 +1,22 @@
-package duplicatefiles2ui;
+package duplicateFilesFinder;
 
-import java.awt.Component;
 import javax.swing.JFileChooser;
 import java.util.*;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import javax.swing.event.*;
 
-public class DuplicateFiles2UI extends javax.swing.JFrame {
+public class FindDuplicateFilesUI extends javax.swing.JFrame {
 
-    DuplicateFiles2 uiFiles;
+    FindDuplicateFiles uiFiles;
 
     // constructor
-    public DuplicateFiles2UI() {
+    public FindDuplicateFilesUI() {
 
         initComponents();
         // Jack Attacks suggestion to center the window!
         this.setLocationRelativeTo(null);
-        uiFiles = new DuplicateFiles2();
+        uiFiles = new FindDuplicateFiles();
     }
 
     /**
@@ -203,13 +201,13 @@ public class DuplicateFiles2UI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DuplicateFiles2UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FindDuplicateFilesUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DuplicateFiles2UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FindDuplicateFilesUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DuplicateFiles2UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FindDuplicateFilesUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DuplicateFiles2UI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FindDuplicateFilesUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -220,7 +218,7 @@ public class DuplicateFiles2UI extends javax.swing.JFrame {
 
             public void run() {
 
-                new DuplicateFiles2UI().setVisible(true);
+                new FindDuplicateFilesUI().setVisible(true);
             }
         });
     }

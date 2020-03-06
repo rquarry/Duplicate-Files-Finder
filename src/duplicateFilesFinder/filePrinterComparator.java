@@ -1,4 +1,4 @@
-package duplicatefiles2ui;
+package duplicateFilesFinder;
 
 import java.util.Comparator;
 
