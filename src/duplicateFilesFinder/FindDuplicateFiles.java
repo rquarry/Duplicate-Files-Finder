@@ -13,15 +13,17 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
 
     // This is the max file size read with "readAllBytes" before input is broken
     // into byte array chunks
-    static final int MAX_FILE_SIZE = 52428800;
+    private static final int MAX_FILE_SIZE = 52428800;
     // This is amount of chunked data read when over 50MB
-    static final int READ_SIZE = 8192;
-    public int count = 0;
-    public ArrayList<String> userFiles;
+    private static final int READ_SIZE = 8192;
+    private int duplicateFileCount = 0;
+    private List<String> userFiles;
+    private List<String> duplicateFiles;
 
     public FindDuplicateFiles() {
 
         userFiles = new ArrayList();
+        duplicateFiles = new ArrayList();
     }
     /*
      * This function is called for each
@@ -39,6 +41,10 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
 
         return CONTINUE;
     }
+
+    public int getDuplicateFileCount() { return duplicateFileCount; }
+
+    public Object[] getDuplicateFiles() { return duplicateFiles.toArray(); }
 
     public String md5sum(File file) {
 
@@ -93,24 +99,30 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
         try {
 
             Files.walkFileTree(startdir, this);
+            // Once the file tree is "walked", look for duplicates.
+            findDuplicates();
 
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
         }
 
     }
 
-    public ArrayList<String> findDuplicates() {
+    public void findDuplicates() {
+
+        // sort the populated list of files
+        Collections.sort(this.userFiles, new filePrinterComparator());
 
         ListIterator<String> itr = userFiles.listIterator();
-        ArrayList<String> matches = new ArrayList();
-        String tmp = null, tmp2 = null;
+
+        String tmp, tmp2 = null;
         filePrinterComparator myComp = new filePrinterComparator();
 
-        count = 0;
+        duplicateFileCount = 0;
 
         while (itr.hasNext()) {
 
-            if (count > 0) {
+            if (duplicateFileCount > 0) {
 
                 tmp = tmp2;
                 tmp2 = itr.next();
@@ -128,11 +140,11 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
 
             //if (tmp.substring(0, 31).compareTo(tmp2.substring(0, 31)) == 0) {
             if (myComp.compare(tmp, tmp2) == 0) {
-                matches.add(tmp);
-                matches.add(tmp2);
-                count++;
+                duplicateFiles.add(tmp);
+                duplicateFiles.add(tmp2);
+                duplicateFileCount++;
             }
         }
-        return matches;
+        //return matches;
     }
 }

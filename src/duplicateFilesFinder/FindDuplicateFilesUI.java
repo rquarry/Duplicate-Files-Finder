@@ -101,7 +101,7 @@ public class FindDuplicateFilesUI extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
-// This is where all the magic happens!!!
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         if (evt.getActionCommand().matches("Open File")) {
@@ -110,16 +110,16 @@ public class FindDuplicateFilesUI extends javax.swing.JFrame {
             chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
             if (chooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION) {
+                // ask the user for a directory
                 uiFiles.loadList(chooser.getSelectedFile());
-                // sort the list that was just loaded
-                Collections.sort(uiFiles.userFiles, new filePrinterComparator());
-                //push the sorted list to the Jlist in window
-                jList1.setListData(uiFiles.findDuplicates().toArray());
-                if (uiFiles.count > 0) {
+
+                //find duplicates and display results
+                jList1.setListData(uiFiles.getDuplicateFiles());
+                if (uiFiles.getDuplicateFileCount() > 0) {
                     jButton1.setEnabled(false);
                     jButton1.setActionCommand("Save To File");
                     jButton1.setText("Save To File");
-                    userMessage("Complete! " + uiFiles.count
+                    userMessage("Complete! " + uiFiles.getDuplicateFileCount()
                             + " Files found\n Select Files to save ");
                 } else {
                     userError("There were no duplicate files found");
