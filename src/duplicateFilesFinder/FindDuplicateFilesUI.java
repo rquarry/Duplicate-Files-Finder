@@ -111,7 +111,7 @@ public class FindDuplicateFilesUI extends javax.swing.JFrame {
 
             if (chooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION) {
                 // ask the user for a directory
-                uiFiles.loadList(chooser.getSelectedFile());
+                uiFiles.loadFileList(chooser.getSelectedFile());
 
                 //find duplicates and display results
                 jList1.setListData(uiFiles.getDuplicateFiles());

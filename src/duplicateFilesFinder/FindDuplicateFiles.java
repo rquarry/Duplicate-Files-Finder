@@ -26,9 +26,8 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
         duplicateFiles = new ArrayList();
     }
     /*
-     * This function is called for each
+     * This function is called for each file visited when the file tree is being walked with loadFileList()
      */
-
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
 
@@ -89,18 +88,18 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
     }
 
     /*
-     * This function kicks off the file tree walk visitFile function and
-     * controls actions on each file visited
+     * This function recursively walks a file tree starting with userDirectory as the top level. During the operation
+     * the visitFile() function controls actions on each file visited.
      */
-    public void loadList(File userFile) {
+    public void loadFileList(File userDirectory) {
 
-        Path startdir = userFile.toPath();
+        Path startDirectory = userDirectory.toPath();
 
         try {
 
-            Files.walkFileTree(startdir, this);
+            Files.walkFileTree(startDirectory, this);
             // Once the file tree is "walked", look for duplicates.
-            findDuplicates();
+            findFileDuplicates();
 
         }
         catch (IOException e) {
@@ -108,7 +107,7 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
 
     }
 
-    public void findDuplicates() {
+    public void findFileDuplicates() {
 
         // sort the populated list of files
         Collections.sort(this.userFiles, new filePrinterComparator());
@@ -145,6 +144,5 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
                 duplicateFileCount++;
             }
         }
-        //return matches;
     }
 }
