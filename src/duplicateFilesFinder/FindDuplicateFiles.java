@@ -88,16 +88,17 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
     }
 
     /*
-     * This function recursively walks a file tree starting with userDirectory as the top level. During the operation
+     * Description:
+     *  This function recursively walks a file tree starting with userDirectory as the top level. During the operation
      * the visitFile() function controls actions on each file visited.
+     * Parameters:
+     *  userDirectory: A readable File object; Serves as the top level of a folder tree search path
      */
     public void loadFileList(File userDirectory) {
 
-        Path startDirectory = userDirectory.toPath();
-
         try {
 
-            Files.walkFileTree(startDirectory, this);
+            Files.walkFileTree(userDirectory.toPath(), this);
             // Once the file tree is "walked", look for duplicates.
             findFileDuplicates();
 
