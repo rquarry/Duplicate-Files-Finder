@@ -29,14 +29,11 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
      * This function is called for each file visited when the file tree is being walked with loadFileList()
      */
     @Override
-    public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
+    public FileVisitResult visitFile(Path filePath, BasicFileAttributes attr) {
 
-        String tmpString;
-        File myFile = file.toFile();
+        File visitedFile = filePath.toFile();
 
-        tmpString = md5sum(myFile) + " " + file.toString();
-
-        userFiles.add(tmpString);
+        userFiles.add(md5sum(visitedFile) + " " + filePath.toString());
 
         return CONTINUE;
     }
@@ -126,19 +123,20 @@ public class FindDuplicateFiles extends SimpleFileVisitor<Path> {
 
                 tmp = tmp2;
                 tmp2 = itr.next();
-            } else {
+            }
+            else {
 
                 tmp = itr.next();
                 // this protects against an odd number of elements crashing
                 // the program
                 if (itr.hasNext()) {
                     tmp2 = itr.next();
-                } else {
+                }
+                else {
                     break;
                 }
             }
 
-            //if (tmp.substring(0, 31).compareTo(tmp2.substring(0, 31)) == 0) {
             if (myComp.compare(tmp, tmp2) == 0) {
                 duplicateFiles.add(tmp);
                 duplicateFiles.add(tmp2);
